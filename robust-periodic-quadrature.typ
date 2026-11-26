@@ -26,7 +26,7 @@
 ]
 #v(0.75em)
 #block(inset: (x: 3mm))[
-  *摘要*　对圆周上的 Hölder 半范数单位球，研究从预置的 $N$ 个点值估计加权积分的问题。任意 $r<N$ 个读数可在采样后丢失，求积规则可以使用保留点的位置。均匀权重下，我们给出对所有 $N,r$ 成立的精确极小极大误差，并刻画最优布点。对严格正连续权重和任意 $r=o(N)$，我们给出误差的渐近等价式及一个与删点数无关的渐近最优设计。Hölder 指数为 $alpha$ 时，删点改变误差首项的临界规模为 $N^(1/(1+alpha))$。在此规模以内，任何渐近最优设计在权重分位坐标中的归一化间距与 1 之差的 $1+alpha$ 次绝对矩趋于零。超过此规模后，局部间距可以持续振荡，而采样点的极限密度依然唯一。
+  *摘要*　研究圆周上 Hölder 函数的加权求积。预置 $N$ 个采样点，任意 $r<N$ 个读数可以丢失，求积规则知道保留点的位置。均匀权重下，本文给出精确极小极大误差并刻画最优布点。对严格正连续权重和 $r=o(N)$，本文给出误差首项和一个与删点数无关的渐近最优设计。设 Hölder 指数为 $alpha$，记 $p = 1 + alpha$。改变误差首项的临界删点规模为 $N^(1\/p)$，在 $alpha=1$ 时为 $sqrt(N)$。当 $r=O(N^(1\/p))$ 时，渐近最优设计在权重分位坐标中归一化间距偏差的 $p$ 次绝对矩趋零。超过此尺度后，局部间距可以持续振荡，极限点密度仍然唯一。
 
   *关键词*　最优求积、Hölder 函数、最优恢复、节点缺失、标量量化
 ]
@@ -34,7 +34,7 @@
 = 引言
 在一个周期内预先确定采样时刻，若若干读数丢失，剩余观测仍可重新加权。给定剩余点，怎样估计积分才能使最坏误差最小？采样之前，又该如何选择节点才能承受最不利的缺失？圆周上每段无采样弧的误差贡献可以单独求出，从而将这两个问题联系起来。
 
-Mathé #cite(1, <bib-mathe>) 研究了实线上的最优加权求积，其结果包含 Lipschitz 函数的无缺失情形。定点求积与最近点量化的关系可见 Creutzig 等 #cite(2, <bib-dere>)，最优量化误差及渐近点密度的系统理论见 Graf 与 Luschgy #cite(3, <bib-graf>)。Frasca 等 #cite(4, <bib-frasca>) 在一维失效覆盖模型中利用了圆周的循环对称性，其目标是失效后最大覆盖距离的期望。本文对给定数量的所有缺失集合取最大值，误差由距最近保留点的距离幂在整圆上的积分决定。长空弧与其余短弧对该积分的相对贡献，决定何时删点会改变最优求积误差的首项。
+无缺失时，最优加权求积与标量量化给出了选择采样密度的依据 #cite(1, <bib-mathe>) #cite(2, <bib-dere>) #cite(3, <bib-graf>)。已有的一维失效覆盖模型也使用圆周的循环对称性 #cite(4, <bib-frasca>)。本文以整个圆周上最近保留点的距离幂积分为误差，对给定数量的所有缺失集合取最大值。长空弧与其余短弧的相对贡献决定删点的临界规模，并进一步约束渐近最优布点的局部间距。
 
 = 模型与定点误差
 设 $TT=bb(R)\/bb(Z)$ 的周长为 1，$d$ 为短弧距离，$dif x$ 为弧长测度。固定 $0<alpha<=1$，记 $p=1+alpha$、$C_alpha=1/(2^alpha p)$。考虑函数类
@@ -143,6 +143,15 @@ $ R_(N,r)(F(X_N);1) <= C_alpha/N^p [(s+eta)^p+(N-s)(1+eta)^p]. $ <e-counter>
 
 均匀权重的精确式覆盖所有 $r<N$。对于一般权重，若 $r/N$ 趋于严格正的常数，最坏缺失弧在极限中可以保持正长度，引理 3 的局部比较不再产生趋零的相对误差。此时该如何从整段弧上的权重分布求出最优设计，是一个独立的变分问题。
 
+#pagebreak(weak: true)
+= 与经典求积和量化的关系
+
+*加权求积。* Curbera #cite(5, <bib-curbera>) 对实线上的高斯权重证明了 Lipschitz 求积的最优误差与渐近节点分布。Mathé #cite(1, <bib-mathe>) 的定理 1 将这一问题推广至实线上满足其假设的权重，以及绝对连续且导数的 $L^q$ 范数有界的函数类。令 $q'$ 为 $q$ 的共轭指数，其渐近设计的节点密度正比于 $w^(q'/(q'+1))$。在 Lipschitz 情形 $q=infinity$、$q'=1$，节点密度为归一化的 $sqrt(w)$，单位 Lipschitz 常数下的最优误差首项为 $1/(4N) (integral_bb(R) sqrt(w) dif x)^2$。本文在圆周上取 $alpha=1$、$r=0$ 得到同型常数与密度。对 $alpha<1$，本文采用点对点 Hölder 半范数。Mathé 的导数范数界通过 Hölder 不等式蕴含相应的 Hölder 正则性，其极值问题仍以导数范数约束为准。
+
+*标量量化。* 引理 1 将定点求积误差写成最近点距离的 $alpha$ 次矩。这与 Creutzig 等 #cite(2, <bib-dere>) 所用的 Lipschitz 求积与量化的联系一致。对实线上的概率密度，Graf 与 Luschgy #cite(3, <bib-graf>) 的定理 6.2 给出经典量化首项，定理 7.5 给出渐近最优节点的经验测度极限。对满足其假设的一维密度 $w$，以距离的 $alpha$ 次矩计量误差时，首项为 $C_alpha N^(-alpha) (integral_bb(R) w^(1\/p) dif x)^p$，极限点密度正比于 $w^(1\/p)$，其中 $p=1+alpha$。Fort 与 Pagès #cite(6, <bib-fort>) 进一步研究了标量最优量化器经验分布的渐近性质。对紧黎曼流形，Iacobelli #cite(7, <bib-iacobelli>) 的定理 1.4 与推论 1.5 在量化阶数至少为 1 时给出相应结果，直接覆盖本文无缺失且 $alpha=1$ 的圆周情形。
+
+*任意删点的代价。* 经典量化可自由选择全部保留点。在本文的模型中，保留集必须来自同一预置设计。允许重新选择 $N-r$ 个点只给出下界 $E_(N,r)(w) >= E_(N-r,0)(w)$，在 $r=o(N)$ 时该下界与 $E_(N,0)(w)$ 渐近等价。定理 4 则刻画最坏缺失的长空弧对首项的贡献，定理 6 则将极限点密度和相邻间距的约束推广至缺失模型。Frasca 等 #cite(4, <bib-frasca>) 在圆周模型中考虑随机失效下最大覆盖距离的期望。本文取所有固定大小缺失集的最大值，并累加各保留弧的积分误差，因此仍需控制长空弧以外的间距。
+
 #heading(numbering: none)[参考文献]
 #set text(size: 9.5pt)
 #set par(leading: 0.45em)
@@ -150,3 +159,6 @@ $ R_(N,r)(F(X_N);1) <= C_alpha/N^p [(s+eta)^p+(N-s)(1+eta)^p]. $ <e-counter>
 #refline(2, <bib-dere>)[J. Creutzig, S. Dereich, T. Müller-Gronbach and K. Ritter. Infinite-dimensional quadrature and approximation of distributions. _Foundations of Computational Mathematics_ *9* (2009), 391–429. #link("https://doi.org/10.1007/s10208-008-9029-x")[doi:10.1007/s10208-008-9029-x].]
 #refline(3, <bib-graf>)[S. Graf and H. Luschgy. _Foundations of Quantization for Probability Distributions_. Lecture Notes in Mathematics 1730, Springer, Berlin, 2000. #link("https://doi.org/10.1007/BFb0103945")[doi:10.1007/BFb0103945].]
 #refline(4, <bib-frasca>)[P. Frasca, F. Garin, B. Gerencsér and J. M. Hendrickx. Optimal one-dimensional coverage by unreliable sensors. _SIAM Journal on Control and Optimization_ *53* (2015), 3120–3140. #link("https://doi.org/10.1137/140968094")[doi:10.1137/140968094].]
+#refline(5, <bib-curbera>)[F. Curbera. Optimal integration of Lipschitz functions with a Gaussian weight. _Journal of Complexity_ *14* (1998), 122–149. #link("https://doi.org/10.1006/jcom.1997.0464")[doi:10.1006/jcom.1997.0464].]
+#refline(6, <bib-fort>)[J.-C. Fort and G. Pagès. Asymptotics of optimal quantizers for some scalar distributions. _Journal of Computational and Applied Mathematics_ *146* (2002), 253–275. #link("https://doi.org/10.1016/S0377-0427(02)00359-X")[doi:10.1016/S0377-0427(02)00359-X].]
+#refline(7, <bib-iacobelli>)[M. Iacobelli. Asymptotic quantization for probability measures on Riemannian manifolds. _ESAIM: Control, Optimisation and Calculus of Variations_ *22* (2016), 770–785. #link("https://doi.org/10.1051/cocv/2015025")[doi:10.1051/cocv/2015025].]
